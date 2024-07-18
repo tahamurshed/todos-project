@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import TodoList from "./components/TodoList";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { TodoContext, TodoProvider } from "./contexts/TodosContext";
+import { useState } from "react";
+import { ToastProvider } from "./contexts/SnakeBarContext";
+const theme = createTheme({
+  typography: {
+    fontFamily: ["Alexandria"],
+  },
+  palette: {
+    primary: {
+      main: "#536dfe",
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <ToastProvider>
+        <div className="App">
+          <TodoProvider>
+            <TodoList />
+          </TodoProvider>
+        </div>
+      </ToastProvider>
+    </ThemeProvider>
   );
 }
 
